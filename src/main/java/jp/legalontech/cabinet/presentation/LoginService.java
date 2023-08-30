@@ -3,8 +3,9 @@ package jp.legalontech.cabinet.presentation;
 import io.grpc.stub.StreamObserver;
 import jp.legalontech.cabinet.LoginResponse;
 import jp.legalontech.cabinet.LoginRequest;
-import jp.legalontech.cabinet.GetAccessTokenResponse;
+import jp.legalontech.cabinet.GetAccessTokenAzureResponse;
 import jp.legalontech.cabinet.LoginServiceGrpc;
+import jp.legalontech.cabinet.UserLoginResponse;
 import jp.legalontech.cabinet.infra.UserRepository;
 import jp.legalontech.cabinet.infra.entity.AuthenticationAzureParamEntity;
 import jp.legalontech.cabinet.infra.entity.LoginParamEntity;
@@ -28,7 +29,7 @@ public class LoginService extends LoginServiceGrpc.LoginServiceImplBase {
         if (user != null) {
             AccessToken accessTokenAzure = azureUseCase.getAccessToken(new AuthenticationAzureParamEntity(request.getMail(), request.getPassword()));
             if (accessTokenAzure != null) {
-                GetAccessTokenResponse responseAzure = GetAccessTokenResponse.newBuilder()
+                GetAccessTokenAzureResponse responseAzure = GetAccessTokenAzureResponse.newBuilder()
                         .setTokenType(accessTokenAzure.getTokenType())
                         .setScope(accessTokenAzure.getScope())
                         .setExpiresIn(accessTokenAzure.getExpiresIn())
@@ -40,14 +41,14 @@ public class LoginService extends LoginServiceGrpc.LoginServiceImplBase {
                         .setRefreshToken(accessTokenAzure.getRefreshToken())
                         .build();
 
-                jp.legalontech.cabinet.User data = jp.legalontech.cabinet.User.newBuilder()
+                UserLoginResponse data = UserLoginResponse.newBuilder()
                         .setId(user.id())
                         .setMail(user.mail())
                         .setRole(user.role())
+                        .setAzure(responseAzure)
                         .build();
                 LoginResponse result = LoginResponse.newBuilder()
                         .setData(data)
-                        .setAzureInfo(responseAzure)
                         .setMessage("Login successfully.")
                         .build();
 

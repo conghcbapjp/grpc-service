@@ -5,17 +5,32 @@ package jp.legalontech.cabinet;
 option java_multiple_files = true;
 option java_package = "jp.legalontech.cabinet";
 
-import "user_service.proto";
-import "azure_service.proto";
-
 message LoginRequest {
     string mail = 1;
     string password = 2;
 }
 
+message UserLoginResponse {
+    int32 id = 1;
+    string mail = 2;
+    int32 role = 3;
+    GetAccessTokenAzureResponse azure = 4;
+}
+
+message GetAccessTokenAzureResponse {
+    string token_type = 1;
+    string scope = 2;
+    string expires_in = 3;
+    string ext_expires_in = 4;
+    string expires_on = 5;
+    string not_before = 6;
+    string resource = 7;
+    string access_token = 8;
+    string refresh_token = 9;
+}
+
 message LoginResponse {
-    User data = 1;
-    GetAccessTokenResponse azure_info = 2;
+    UserLoginResponse data = 1;
     string message = 3;
 }
 
