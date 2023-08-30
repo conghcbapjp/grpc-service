@@ -2,9 +2,9 @@ package jp.legalontech.cabinet.presentation;
 
 import io.grpc.stub.StreamObserver;
 import jp.legalontech.cabinet.AzureServiceGrpc;
-import jp.legalontech.cabinet.AzureServiceOuterClass.GetAccessTokenRequest;
-import jp.legalontech.cabinet.AzureServiceOuterClass.GetAccessTokenResponse;
-import jp.legalontech.cabinet.AzureServiceOuterClass.AuthenticationResponse;
+import jp.legalontech.cabinet.GetAccessTokenRequest;
+import jp.legalontech.cabinet.GetAccessTokenResponse;
+import jp.legalontech.cabinet.AuthenticationResponse;
 import jp.legalontech.cabinet.infra.entity.AuthenticationAzureParamEntity;
 import jp.legalontech.cabinet.model.AccessToken;
 import jp.legalontech.cabinet.usecase.AzureUseCase;

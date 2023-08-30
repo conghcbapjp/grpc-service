@@ -1,11 +1,10 @@
 package jp.legalontech.cabinet.presentation;
 
 import io.grpc.stub.StreamObserver;
-import jp.legalontech.cabinet.AzureServiceOuterClass;
+import jp.legalontech.cabinet.LoginResponse;
+import jp.legalontech.cabinet.LoginRequest;
+import jp.legalontech.cabinet.GetAccessTokenResponse;
 import jp.legalontech.cabinet.LoginServiceGrpc;
-import jp.legalontech.cabinet.LoginServiceOuterClass.LoginRequest;
-import jp.legalontech.cabinet.LoginServiceOuterClass.LoginResponse;
-import jp.legalontech.cabinet.UserServiceOuterClass;
 import jp.legalontech.cabinet.infra.UserRepository;
 import jp.legalontech.cabinet.infra.entity.AuthenticationAzureParamEntity;
 import jp.legalontech.cabinet.infra.entity.LoginParamEntity;
@@ -29,7 +28,7 @@ public class LoginService extends LoginServiceGrpc.LoginServiceImplBase {
         if (user != null) {
             AccessToken accessTokenAzure = azureUseCase.getAccessToken(new AuthenticationAzureParamEntity(request.getMail(), request.getPassword()));
             if (accessTokenAzure != null) {
-                AzureServiceOuterClass.GetAccessTokenResponse responseAzure = AzureServiceOuterClass.GetAccessTokenResponse.newBuilder()
+                GetAccessTokenResponse responseAzure = GetAccessTokenResponse.newBuilder()
                         .setTokenType(accessTokenAzure.getTokenType())
                         .setScope(accessTokenAzure.getScope())
                         .setExpiresIn(accessTokenAzure.getExpiresIn())
@@ -41,7 +40,7 @@ public class LoginService extends LoginServiceGrpc.LoginServiceImplBase {
                         .setRefreshToken(accessTokenAzure.getRefreshToken())
                         .build();
 
-                UserServiceOuterClass.User data = UserServiceOuterClass.User.newBuilder()
+                jp.legalontech.cabinet.User data = jp.legalontech.cabinet.User.newBuilder()
                         .setId(user.id())
                         .setMail(user.mail())
                         .setRole(user.role())

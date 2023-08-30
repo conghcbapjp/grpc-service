@@ -2,9 +2,8 @@ package jp.legalontech.cabinet.presentation;
 
 import io.grpc.stub.StreamObserver;
 import jp.legalontech.cabinet.UserServiceGrpc;
-import jp.legalontech.cabinet.UserServiceOuterClass;
-import jp.legalontech.cabinet.UserServiceOuterClass.AddUserResponse;
-import jp.legalontech.cabinet.UserServiceOuterClass.AddUserRequest;
+import jp.legalontech.cabinet.AddUserResponse;
+import jp.legalontech.cabinet.AddUserRequest;
 import jp.legalontech.cabinet.infra.UserRepository;
 import jp.legalontech.cabinet.infra.entity.AddUserParamEntity;
 import jp.legalontech.cabinet.model.User;
@@ -27,7 +26,7 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
         ));
 
         if (user != null) {
-            UserServiceOuterClass.User userInserted = UserServiceOuterClass.User.newBuilder()
+            jp.legalontech.cabinet.User userInserted = jp.legalontech.cabinet.User.newBuilder()
                     .setId(user.id())
                     .setMail(user.mail())
                     .setRole(user.role())
