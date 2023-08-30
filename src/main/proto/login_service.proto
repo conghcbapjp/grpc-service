@@ -5,10 +5,6 @@ package jp.legalontech.cabinet;
 import "user_service.proto";
 import "azure_service.proto";
 
-service LoginService {
-    rpc Login(LoginRequest) returns (LoginResponse) {}
-}
-
 message LoginRequest {
     string mail = 1;
     string password = 2;
@@ -18,6 +14,10 @@ message LoginResponse {
     User data = 1;
     GetAccessTokenResponse azure_info = 2;
     string message = 3;
+}
+
+service LoginService {
+    rpc Login(LoginRequest) returns (LoginResponse) {}
 }
 
 

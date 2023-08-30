@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package jp.legalontech.cabinet;
 
-service UserService {
-    rpc AddUser(AddUserRequest) returns (AddUserResponse) {}
-}
-
 message AddUserRequest {
     string mail = 1;
     string password = 2;
@@ -21,4 +17,8 @@ message User {
     int32 id = 1;
     string mail = 2;
     int32 role = 3;
+}
+
+service UserService {
+    rpc AddUser(AddUserRequest) returns (AddUserResponse) {}
 }

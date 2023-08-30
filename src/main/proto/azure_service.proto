@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package jp.legalontech.cabinet;
 
-service AzureService {
-    rpc GetAccessToken(GetAccessTokenRequest) returns (AuthenticationResponse) {}
-}
-
 message GetAccessTokenRequest {
     string username = 1;
     string password = 2;
@@ -26,4 +22,8 @@ message GetAccessTokenResponse {
 message AuthenticationResponse {
     GetAccessTokenResponse data = 1;
     string message = 2;
+}
+
+service AzureService {
+    rpc GetAccessToken(GetAccessTokenRequest) returns (AuthenticationResponse) {}
 }
