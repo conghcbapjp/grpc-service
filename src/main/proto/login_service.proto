@@ -14,7 +14,7 @@ message UserLoginResponse {
     int32 id = 1;
     string mail = 2;
     int32 role = 3;
-    GetAccessTokenAzureResponse azure = 4;
+    GetAccessTokenAzureResponse azure_info = 4;
 }
 
 message GetAccessTokenAzureResponse {
